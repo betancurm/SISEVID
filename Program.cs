@@ -1,8 +1,12 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SISEVID;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddSqlServer<SisevidContext>(builder.Configuration.GetConnectionString("cnSisevid"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,5 +27,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapGet("/dbconexion",async([FromServices] SisevidContext dbContext)=>
+{
+    dbContext.Database.EnsureCreated();
+    return Results.Ok("Base de datos en memoria "+ dbContext.Database.IsInMemory());
+});
 
 app.Run();
