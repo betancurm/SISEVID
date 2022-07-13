@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SISEVID;
+using SISEVID.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddSqlServer<SisevidContext>(builder.Configuration.GetConnectionString("cnSisevid"));
 var app = builder.Build();
 
@@ -29,8 +32,8 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapBlazorHub();  
-
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
 app.MapGet("/dbconexion",async([FromServices] SisevidContext dbContext)=>
 {
     dbContext.Database.EnsureCreated();
