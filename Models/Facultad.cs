@@ -4,8 +4,6 @@ namespace SISEVID.Models
 {
     public class Facultad : UniversidadBase
     {
-        [Required]
-        [MaxLength(50)]
         public string Email { get; set; }
         public Guid SedeId { get; set; }
         public virtual Sede Sede { get; set; }
