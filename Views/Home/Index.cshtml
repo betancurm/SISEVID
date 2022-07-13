@@ -1,6 +1,11 @@
-﻿@{
+﻿@using SISEVID.Componets;
+    
+
+@{
     ViewData["Title"] = "Home Page";
 }
+<h4>Hola desde MVC</h4>
+<component type="typeof(BlazorComponent)" render-mode="ServerPrerendered" />
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
