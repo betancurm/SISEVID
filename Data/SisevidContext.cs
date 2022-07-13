@@ -14,6 +14,15 @@ namespace SISEVID
         public DbSet<Literal> Literales { get; set; }
         public DbSet<Numeral> Numerales { get; set; }
 
+        //-------------------------------------------------------------------------------------
+
+        public DbSet<Semestre> Semestres {get; set; }
+        public DbSet<Asignatura> Asignaturas { get; set; }
+        public DbSet<Grupo> Grupos { get; set; }
+        public DbSet<Profesor> Profesores { get; set; }
+
+
+
         public SisevidContext(DbContextOptions<SisevidContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
