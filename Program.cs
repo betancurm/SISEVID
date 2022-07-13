@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddServerSideBlazor();
 builder.Services.AddSqlServer<SisevidContext>(builder.Configuration.GetConnectionString("cnSisevid"));
 var app = builder.Build();
 
@@ -27,6 +28,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapBlazorHub();  
 
 app.MapGet("/dbconexion",async([FromServices] SisevidContext dbContext)=>
 {
